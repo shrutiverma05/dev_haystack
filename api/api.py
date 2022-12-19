@@ -5,7 +5,7 @@ from haystack.document_stores import ElasticsearchDocumentStore
 from haystack.nodes import EmbeddingRetriever
 from haystack.pipelines import FAQPipeline
 
-index_names = ['haytest']
+index_names = ['haytest','vootours','gts']
 document_store = []
 retriever = []
 pipe = []
@@ -37,25 +37,27 @@ for i in range(len(index_names)):
 async def query(q):
     return pipe[0].run(query=q, params={"Retriever": {"top_k": 2}})
 
-# @app.get('/query/'+index_names[1])
-# async def query(q):
-#     return pipe[1].run(query=q, params={"Retriever": {"top_k": 2}})
+@app.get('/query/'+index_names[1])
+async def query(q):
+    return pipe[1].run(query=q, params={"Retriever": {"top_k": 2}})
 
-@app.get("/initialized")
-def check_status():
-    """
-    This endpoint can be used during startup to understand if the
-    server is ready to take any requests, or is still loading.
+@app.get('/query/'+index_names[2])
+async def query(q):
+    return pipe[2].run(query=q, params={"Retriever": {"top_k": 2}})
 
-    The recommended approach is to call this endpoint with a short timeout, 
-    like 500ms, and in case of no reply, consider the server busy.
-    """
-    return True    
+# @app.get("/initialized")
+# def check_status():
+#     """
+#     This endpoint can be used during startup to understand if the
+#     server is ready to take any requests, or is still loading.
+
+#     The recommended approach is to call this endpoint with a short timeout, 
+#     like 500ms, and in case of no reply, consider the server busy.
+#     """
+#     return True    
 
 
-# @app.get('/query/'+index_names[2])
-# async def query(q):
-#     return pipe[2].run(query=q, params={"Retriever": {"top_k": 2}})
+
 
 # @app.get('/query/'+index_names[3])
 # async def query(q):
