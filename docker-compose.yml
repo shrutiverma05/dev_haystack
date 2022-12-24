@@ -47,7 +47,7 @@ services:
        - ELASTICSEARCH_HOST=elasticsearch
      depends_on:
       elasticsearch:
-         condition: service_healthy
+        condition: service_healthy
      
    api:
      container_name: "haystack_api"
