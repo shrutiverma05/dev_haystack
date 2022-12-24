@@ -23,7 +23,7 @@ services:
        - test-network
      deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
      environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
@@ -41,7 +41,7 @@ services:
        - test-network
      deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
@@ -58,7 +58,7 @@ services:
        - test-network
      deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
