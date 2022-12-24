@@ -24,7 +24,7 @@ services:
      deploy:
       restart_policy:
         condition: on-failure
-        max-attempts: 3
+        max-attempts: 0
      environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
@@ -43,7 +43,7 @@ services:
      deploy:
       restart_policy:
         condition: on-failure
-        max-attempts: 3
+        max-attempts: 0
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
@@ -61,7 +61,7 @@ services:
      deploy:
       restart_policy:
         condition: on-failure
-        max-attempts: 3
+        max-attempts: 0
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
