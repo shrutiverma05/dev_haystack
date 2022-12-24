@@ -16,13 +16,12 @@ services:
   #       retries: 10
    
    elasticsearch:
-     restart: always
      image: "deepset/elasticsearch-countries-and-capitals"
      ports:
        - 9200:9200
      networks:
        - test-network
-    #  restart: on-failure 
+     restart: always 
      environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
@@ -34,12 +33,11 @@ services:
      
 
    haystack:
-     restart: always
      container_name: "haystack"
      build: .
      networks:
        - test-network
-    #  restart: on-failure  
+     restart: always
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
@@ -48,14 +46,13 @@ services:
          condition: service_healthy
      
    api:
-     restart: always
      container_name: "haystack_api"
      build: ./api
      ports:
        - 8000:8000
      networks:
        - test-network
-    #  restart: on-failure
+     restart: always
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
