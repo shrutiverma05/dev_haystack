@@ -21,7 +21,7 @@ services:
        - 9200:9200
      networks:
        - test-network
-     #restart: always 
+     restart: on-failure
      environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
@@ -37,7 +37,7 @@ services:
      build: .
      networks:
        - test-network
-     #restart: always
+     restart: on-failure
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
@@ -52,7 +52,7 @@ services:
        - 8000:8000
      networks:
        - test-network
-     #restart: always
+     restart: on-failure
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
