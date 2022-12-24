@@ -1,6 +1,6 @@
 version: '3'
 services:
-   
+   restart: always
   #  documenthost:
   #    container_name: "my-docker-instance"
   #    build: ./Hosted data
@@ -30,7 +30,7 @@ services:
         interval: 10s
         timeout: 1s
         retries: 10
-     restart: always
+     
 
    haystack:
      container_name: "haystack"
@@ -44,7 +44,7 @@ services:
      depends_on:
       elasticsearch:
          condition: service_healthy
-     restart: always
+     
    api:
      container_name: "haystack_api"
      build: ./api
@@ -59,6 +59,6 @@ services:
      depends_on:
       elasticsearch:
          condition: service_healthy
-     restart: always
+     
 networks:
   test-network:
