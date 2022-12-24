@@ -1,6 +1,6 @@
 version: '3'
 services:
-   restart: always
+    
   #  documenthost:
   #    container_name: "my-docker-instance"
   #    build: ./Hosted data
@@ -14,8 +14,9 @@ services:
   #       interval: 10s
   #       timeout: 1s
   #       retries: 10
-
+   
    elasticsearch:
+     restart: always
      image: "deepset/elasticsearch-countries-and-capitals"
      ports:
        - 9200:9200
@@ -33,6 +34,7 @@ services:
      
 
    haystack:
+     restart: always
      container_name: "haystack"
      build: .
      networks:
@@ -46,6 +48,7 @@ services:
          condition: service_healthy
      
    api:
+     restart: always
      container_name: "haystack_api"
      build: ./api
      ports:
