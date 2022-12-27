@@ -26,6 +26,14 @@ services:
      environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms300m -Xmx300m"
+    #  deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 50M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 20M
     #  mem_limit: ${MEM_LIMIT}
     #  ulimits:
     #     memlock:
@@ -64,6 +72,14 @@ services:
      depends_on:
       elasticsearch:
         condition: service_healthy
+     deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
      
    api:
      #restart: always
@@ -76,6 +92,14 @@ services:
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
+     deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
      depends_on:
       elasticsearch:
          condition: service_healthy
