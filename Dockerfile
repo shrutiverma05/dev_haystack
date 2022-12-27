@@ -7,6 +7,6 @@ COPY Haystack.py ./
 RUN pip install farm-haystack 
 RUN pip install fastapi
 RUN pip install uvicorn
-#ENTRYPOINT : /bin/sh -c
+ENTRYPOINT : /bin/sh -c
 CMD ["python","./Haystack.py"]
 
