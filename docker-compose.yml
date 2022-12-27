@@ -17,6 +17,7 @@ services:
    
    elasticsearch:
      #restart: always
+     container_name: "elasticsearch-main"
      image: "deepset/elasticsearch-countries-and-capitals"
      ports:
        - 9200:9200
