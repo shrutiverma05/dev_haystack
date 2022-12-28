@@ -34,7 +34,7 @@ services:
   #       retries: 10
    
    elasticsearch:
-     #restart: always
+     restart: always
      container_name: "elasticsearch-main"
      image: "deepset/elasticsearch-countries-and-capitals"
      ports:
@@ -79,7 +79,7 @@ services:
      
 
    haystack:
-     #restart: always
+     restart: always
      container_name: "haystack"
      build: .
      networks:
@@ -100,7 +100,7 @@ services:
     #       memory: 20M
      
    api:
-     #restart: always
+     restart: always
      container_name: "haystack_api"
      build: ./api
      ports:
