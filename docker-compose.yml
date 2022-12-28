@@ -11,7 +11,7 @@ services:
       - api
     restart: always
     environment:
-      DOMAINS: 'novamluat.northeurope.cloudapp.azure.com -> http://novamluat.northeurope.cloudapp.azure:80'
+      DOMAINS: 'novamluat.northeurope.cloudapp.azure.com -> https://uat.ml.novacept.io'
       # STAGE: 'production' # Don't use production until staging works
       # FORCE_RENEW: 'true'
     volumes: 
