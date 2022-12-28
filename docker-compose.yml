@@ -11,7 +11,7 @@ services:
       - api
     restart: always
     environment:
-      DOMAINS: 'https://uat.ml.novacept.io'
+      DOMAINS: 'uat.ml.novacept.io -> https://uat.ml.novacept.io'
       # STAGE: 'production' # Don't use production until staging works
       # FORCE_RENEW: 'true'
     volumes: 
