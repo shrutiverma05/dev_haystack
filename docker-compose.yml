@@ -16,6 +16,8 @@ services:
       # FORCE_RENEW: 'true'
     volumes: 
       - https-portal-data:/var/lib/https-portal
+    networks:
+       - test-network
     
   #  documenthost:
   #    container_name: "my-docker-instance"
