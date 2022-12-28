@@ -3,14 +3,15 @@ services:
    https-portal:
     image: steveltn/https-portal:1
     ports:
-      - '8000:443'
+      - '443:443'
+      - '80:80'
     links:
       - elasticsearch
       - haystack
       - api
     restart: always
     environment:
-      DOMAINS: 'uat.ml.novacept.io -> http://api'
+      DOMAINS: 'uat.ml.novacept.io -> http://api:8000'
       # STAGE: 'production' # Don't use production until staging works
       # FORCE_RENEW: 'true'
     volumes: 
