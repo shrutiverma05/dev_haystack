@@ -6,12 +6,12 @@ services:
       - '80:80'
       - '443:443'
     links:
-      #- elasticsearch
+      - elasticsearch
       - haystack
       - api
     restart: always
     environment:
-      DOMAINS: 'novamluat.northeurope.cloudapp.azure.com -> https://uat.ml.novacept.io'
+      DOMAINS: 'uat.ml.novacept.io -> https://uat.ml.novacept.io'
       # STAGE: 'production' # Don't use production until staging works
       # FORCE_RENEW: 'true'
     volumes: 
