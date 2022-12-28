@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
    https-portal:
     image: steveltn/https-portal:1
@@ -75,6 +75,7 @@ services:
         interval: 10s
         timeout: 1s
         retries: 10
+        start_period: 45s
     
      
 
