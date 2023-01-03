@@ -39,9 +39,11 @@ services:
      build: .
      networks:
        - test-network
-     environment:
-      # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
-       - ELASTICSEARCH_HOST=elasticsearch
+    #  environment:
+    #   # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
+    #    - ELASTICSEARCH_HOST=elasticsearch
+     env_file:
+       - .env 
      depends_on:
        elasticsearch:
           condition: service_healthy
@@ -54,9 +56,11 @@ services:
        - 8000:8000
      networks:
        - test-network
-     environment:
-      # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
-       - ELASTICSEARCH_HOST=elasticsearch
+    #  environment:
+    #   # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
+    #    - ELASTICSEARCH_HOST=elasticsearch
+     env_file:
+       - .env 
      depends_on:
       elasticsearch:
          condition: service_healthy
