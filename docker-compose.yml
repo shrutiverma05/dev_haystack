@@ -43,7 +43,7 @@ services:
     #   # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
     #    - ELASTICSEARCH_HOST=elasticsearch
      env_file:
-       - .env 
+       - .env.dev
      depends_on:
        elasticsearch:
           condition: service_healthy
@@ -60,7 +60,7 @@ services:
     #   # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
     #    - ELASTICSEARCH_HOST=elasticsearch
      env_file:
-       - .env 
+       - .env.dev
      depends_on:
       elasticsearch:
          condition: service_healthy
