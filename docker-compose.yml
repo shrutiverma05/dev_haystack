@@ -1,24 +1,6 @@
-version: '3.4'
+version: '3'
 services:
-   https-portal:
-    image: steveltn/https-portal:1
-    ports:
-      - '443:443'
-      - '80:80'
-    links:
-      - elasticsearch
-      - haystack
-      - api
-    restart: always
-    environment:
-      DOMAINS: 'uat.ml.novacept.io -> http://api:8000'
-      # STAGE: 'production' # Don't use production until staging works
-      # FORCE_RENEW: 'true'
-    volumes: 
-      - https-portal-data:/var/lib/https-portal
-    networks:
-       - test-network
-    
+
   #  documenthost:
   #    container_name: "my-docker-instance"
   #    build: ./Hosted data
@@ -26,61 +8,33 @@ services:
   #      - 8060:8060
   #    networks:
   #      - test-network
-  #   #  restart: on-failure 
-  #    healthcheck: 
+  #   #  restart: on-failure
+  #    healthcheck:
   #       test: curl --fail http://localhost:8060/ || exit 1
   #       interval: 10s
   #       timeout: 1s
   #       retries: 10
-   
+
    elasticsearch:
-     restart: always
-     container_name: "elasticsearch-main"
+     restart: on-failure
      image: "deepset/elasticsearch-countries-and-capitals"
      ports:
        - 9200:9200
      networks:
        - test-network
-     environment:
-      - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms300m -Xmx1024m"
-    #  deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '0.50'
-    #       memory: 50M
-    #     reservations:
-    #       cpus: '0.25'
-    #       memory: 20M
-    #  mem_limit: ${MEM_LIMIT}
-    #  ulimits:
-    #     memlock:
-    #       soft: -1
-    #       hard: -1
-    #  deploy:
-    #   resources: 
-    #     limits: 
-    #       cpus: "0.50"  # Use at most 50% of one CPU core
-    #       memory: 50M  # Use at most 50 MB of RAM
-    #  ulimits: 
-    #   memlock: 
-    #     hard: -1
-    #     soft: -1
-    #   nofile: 
-    #     hard: 65535
-    #     soft: 65535
-    #   nproc: 65535
+    #  environment:
+    #   - discovery.type=single-node
+    #   - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+     env_file:
+       - .env 
      healthcheck:
         test: curl --fail http://localhost:9200/_cat/health || exit 1
         interval: 10s
         timeout: 1s
         retries: 10
-        start_period: 45s
-    
-     
 
    haystack:
-     restart: always
+     restart: on-failure
      container_name: "haystack"
      build: .
      networks:
@@ -89,19 +43,11 @@ services:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
      depends_on:
-      elasticsearch:
-        condition: service_healthy
-    #  deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '0.50'
-    #       memory: 50M
-    #     reservations:
-    #       cpus: '0.25'
-    #       memory: 20M
-     
+       elasticsearch:
+          condition: service_healthy
+
    api:
-     restart: always
+     restart: on-failure
      container_name: "haystack_api"
      build: ./api
      ports:
@@ -111,19 +57,9 @@ services:
      environment:
       # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
        - ELASTICSEARCH_HOST=elasticsearch
-    #  deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '0.50'
-    #       memory: 50M
-    #     reservations:
-    #       cpus: '0.25'
-    #       memory: 20M
      depends_on:
       elasticsearch:
          condition: service_healthy
-     
+
 networks:
   test-network:
-volumes:
-  https-portal-data:
