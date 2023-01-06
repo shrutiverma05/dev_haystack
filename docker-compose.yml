@@ -64,6 +64,8 @@ services:
      depends_on:
       elasticsearch:
          condition: service_healthy
+   cron:
+     build: ./dockerized-cron
 
 networks:
   test-network:
