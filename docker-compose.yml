@@ -16,7 +16,7 @@ services:
   #       retries: 10
 
    elasticsearch:
-     restart: unless-stopped
+     restart: no
      image: "deepset/elasticsearch-countries-and-capitals"
      ports:
        - 9200:9200
@@ -34,7 +34,7 @@ services:
         retries: 10
 
    haystack:
-     restart: unless-stopped
+     restart: no
      container_name: "haystack"
      build: .
      networks:
@@ -49,7 +49,7 @@ services:
           condition: service_healthy
 
    api:
-     restart: unless-stopped
+     restart: no
      container_name: "haystack_api"
      build: ./api
      ports:
@@ -64,8 +64,6 @@ services:
      depends_on:
       elasticsearch:
          condition: service_healthy
-   cron:
-     build: ./dockerized-cron
 
 networks:
   test-network:
