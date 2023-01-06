@@ -16,7 +16,7 @@ services:
   #       retries: 10
 
    elasticsearch:
-     restart: 'no'
+     restart: 'on-failure'
      image: "deepset/elasticsearch-countries-and-capitals"
      ports:
        - 9200:9200
@@ -34,7 +34,7 @@ services:
         retries: 10
 
    haystack:
-     restart: 'no'
+     restart: 'on-failure'
      container_name: "haystack"
      build: .
      networks:
@@ -49,7 +49,7 @@ services:
           condition: service_healthy
 
    api:
-     restart: 'no'
+     restart: 'on-failure'
      container_name: "haystack_api"
      build: ./api
      ports:
